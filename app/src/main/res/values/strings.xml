@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ClientManager</string>
+    <string name="name">Nome</string>
+    <string name="mobile">Aparelho</string>
+    <string name="contact">Contato</string>
+    <string name="date">Data</string>
+    <string name="edit_issue_desc">Descrição do Problema</string>
+    <string name="card">Cartão</string>
+    <string name="cash">Dinheiro</string>
+    <string name="total_value">Valor total</string>
+    <string name="paid_value">Valor pago</string>
+    <string name="done">Resolvido</string>
 </resources>

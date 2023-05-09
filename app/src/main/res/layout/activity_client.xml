@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2C3E50"
+    android:padding="24dp"
+    tools:context=".ClientActivity">
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_mobile"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@color/white"
+        android:hint="@string/mobile"
+        android:inputType="text"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@id/edit_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_name" />
+
+    <EditText
+        android:id="@+id/edit_date"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:hint="@string/date"
+        android:inputType="date"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edit_mobile"
+        app:layout_constraintTop_toBottomOf="@id/edit_name" />
+
+    <EditText
+        android:id="@+id/edit_contact"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:hint="@string/contact"
+        android:inputType="text"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/edit_mobile" />
+
+    <EditText
+        android:id="@+id/edit_issue_desc"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:hint="@string/edit_issue_desc"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_contact" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:elevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_issue_desc"
+        tools:layout_editor_absoluteX="24dp" />
+
+    <RadioButton
+        android:id="@+id/radio_cash"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:background="@color/white"
+        android:text="@string/cash"
+        app:layout_constraintEnd_toStartOf="@+id/radio_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <RadioButton
+        android:id="@+id/radio_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:text="@string/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/radio_cash"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <EditText
+        android:id="@+id/edit_total_value"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:hint="@string/total_value"
+        android:inputType="number"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="@id/edit_mobile"
+        app:layout_constraintStart_toStartOf="@id/edit_mobile"
+        app:layout_constraintTop_toBottomOf="@+id/radio_cash" />
+
+    <EditText
+        android:id="@+id/edit_paid_value"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:hint="@string/paid_value"
+        android:inputType="number"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="@id/edit_mobile"
+        app:layout_constraintStart_toStartOf="@id/edit_mobile"
+        app:layout_constraintTop_toBottomOf="@+id/edit_total_value" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_paid"
+        app:layout_constraintStart_toEndOf="@id/edit_paid_value"
+        app:layout_constraintTop_toTopOf="@id/edit_paid_value"
+        app:layout_constraintBottom_toBottomOf="@id/edit_paid_value"/>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:elevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_paid_value"
+        tools:layout_editor_absoluteX="24dp" />
+
+    <RadioButton
+        android:id="@+id/radio_done"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:background="@color/white"
+        android:text="@string/done"
+        app:layout_constraintEnd_toStartOf="@+id/edit_date_finished"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <EditText
+        android:id="@+id/edit_date_finished"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:hint="@string/date"
+        android:inputType="date"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/radio_done"
+        app:layout_constraintTop_toBottomOf="@id/view2" />
+
+    <Button
+        android:id="@+id/btn_send_client"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@android:string/ok"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_date_finished"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

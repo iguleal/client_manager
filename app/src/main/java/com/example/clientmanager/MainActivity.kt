@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
         rvMain.adapter = adapter
         rvMain.layoutManager = GridLayoutManager(this, 2)
-        
+
     }
 
     private fun listItemAdd(list: MutableList<MainItem>) {
