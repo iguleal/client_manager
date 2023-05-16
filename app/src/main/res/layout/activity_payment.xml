@@ -1,20 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#2C3E50"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="32dp"
         tools:context=".PaymentActivity">
+
         <EditText
+            android:id="@+id/edit_total_value"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:hint="@string/total_value"
+            android:inputType="number"
+            android:padding="8dp"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/edit_total_value" />
+
+        <TextView
+            android:id="@+id/txt_cash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
-        
+            android:layout_marginTop="32dp"
+            android:text="@string/cash"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@id/view" />
 
+        <EditText
+            android:id="@+id/edit_cash_value"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:hint="@string/value"
+            android:inputType="number"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_cash"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/txt_cash" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/white"
+            android:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_cash" />
+
+        <TextView
+            android:id="@+id/txt_pix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/pix"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@id/view2" />
+
+        <EditText
+            android:id="@+id/edit_pix_value"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:hint="@string/value"
+            android:inputType="number"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_pix"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/txt_pix" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/white"
+            android:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_pix" />
+
+        <TextView
+            android:id="@+id/txt_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/card"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
+
+        <EditText
+            android:id="@+id/edit_card_value"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:hint="@string/value"
+            android:inputType="number"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_card"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintStart_toEndOf="@+id/input_card"
+            app:layout_constraintTop_toTopOf="@+id/txt_card" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_card"
+            style="@style/AutoTextViewForm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_card_value"
+            app:layout_constraintEnd_toStartOf="@+id/edit_card_value"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/txt_card"
+            app:layout_constraintTop_toTopOf="@+id/edit_card_value">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/black"
+            android:text="@string/finish"
+            app:layout_constraintTop_toBottomOf="@id/txt_card" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+

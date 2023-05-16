@@ -10,4 +10,10 @@
     <string name="total_value">Valor total</string>
     <string name="paid_value">Valor pago</string>
     <string name="done">Resolvido</string>
+    <string name="next">Próximo</string>
+    <string name="value">Valor</string>
+    <string name="pix">PIX</string>
+    <string name="finish">Finalizar</string>
+    <string name="payment_form">forma de pagamento</string>
+    <string name="conclude">concluir</string>
 </resources>

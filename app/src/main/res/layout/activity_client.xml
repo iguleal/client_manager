@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#2C3E50"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2C3E50"
-        android:padding="24dp"
+        android:padding="32dp"
         tools:context=".ClientActivity">
 
         <EditText
@@ -26,7 +26,7 @@
             android:id="@+id/edit_mobile"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="4dp"
             android:background="@color/white"
             android:hint="@string/mobile"
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@color/white"
             android:hint="@string/date"
             android:inputType="date"
@@ -54,7 +54,7 @@
             android:id="@+id/edit_contact"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@color/white"
             android:hint="@string/contact"
             android:inputType="text"
@@ -65,7 +65,7 @@
             android:id="@+id/edit_issue_desc"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@color/white"
             android:hint="@string/edit_issue_desc"
             android:padding="8dp"
@@ -75,69 +75,30 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:background="@color/white"
             android:elevation="4dp"
             app:layout_constraintTop_toBottomOf="@id/edit_issue_desc"
             tools:layout_editor_absoluteX="24dp" />
 
-        <RadioButton
-            android:id="@+id/radio_cash"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btn_payment"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/payment_form"
+            android:backgroundTint="#1F7A06"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
-            android:background="@color/white"
-            android:text="@string/cash"
-            app:layout_constraintEnd_toStartOf="@+id/radio_card"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
-        <RadioButton
-            android:id="@+id/radio_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/white"
-            android:text="@string/card"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/radio_cash"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
-
-        <EditText
-            android:id="@+id/edit_total_value"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/white"
-            android:hint="@string/total_value"
-            android:inputType="number"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="@id/edit_mobile"
-            app:layout_constraintStart_toStartOf="@id/edit_mobile"
-            app:layout_constraintTop_toBottomOf="@+id/radio_cash" />
-
-        <EditText
-            android:id="@+id/edit_paid_value"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/white"
-            android:hint="@string/paid_value"
-            android:inputType="number"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="@id/edit_mobile"
-            app:layout_constraintStart_toStartOf="@id/edit_mobile"
-            app:layout_constraintTop_toBottomOf="@+id/edit_total_value" />
-
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_paid"
-            app:layout_constraintBottom_toBottomOf="@id/edit_paid_value"
-            app:layout_constraintStart_toEndOf="@id/edit_paid_value"
-            app:layout_constraintTop_toTopOf="@id/edit_paid_value" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_not_paid"
+            android:layout_marginStart="48dp"
+            app:layout_constraintBottom_toBottomOf="@id/btn_payment"
+            app:layout_constraintStart_toEndOf="@id/btn_payment"
+            app:layout_constraintTop_toTopOf="@id/btn_payment" />
 
         <View
             android:id="@+id/view2"
@@ -146,7 +107,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/white"
             android:elevation="4dp"
-            app:layout_constraintTop_toBottomOf="@id/edit_paid_value"
+            app:layout_constraintTop_toBottomOf="@id/btn_payment"
             tools:layout_editor_absoluteX="24dp" />
 
         <RadioButton
@@ -176,11 +137,12 @@
             app:layout_constraintTop_toBottomOf="@id/view2" />
 
         <Button
-            android:id="@+id/btn_send_client"
+            android:id="@+id/btn_conclude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@android:string/ok"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/black"
+            android:text="@string/conclude"
             app:layout_constraintTop_toBottomOf="@id/edit_date_finished" />
 
 
