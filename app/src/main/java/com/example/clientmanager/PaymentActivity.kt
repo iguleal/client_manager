@@ -27,7 +27,7 @@ class PaymentActivity : AppCompatActivity() {
             keyboardService.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
 
-        val btnFinish: Button = findViewById(R.id.btn_finish)
+        val btnFinish: Button = findViewById(R.id.btn_cancel)
         btnFinish.setOnClickListener {
             finish()
         }

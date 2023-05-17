@@ -16,4 +16,5 @@
     <string name="finish">Finalizar</string>
     <string name="payment_form">forma de pagamento</string>
     <string name="conclude">concluir</string>
+    <string name="cancel">cancelar</string>
 </resources>

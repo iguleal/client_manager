@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#2C3E50"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#2C3E50">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -146,13 +146,30 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_finish"
-            android:layout_width="match_parent"
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:backgroundTint="#f00"
+            android:text="@string/cancel"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintEnd_toStartOf="@id/btn_finish"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_card" />
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:text="@string/finish"
-            app:layout_constraintTop_toBottomOf="@id/txt_card" />
+            app:layout_constraintHorizontal_weight="5"
+            android:layout_marginStart="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_cancel"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

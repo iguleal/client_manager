@@ -16,8 +16,8 @@ class ClientActivity : AppCompatActivity() {
             startActivity(Intent(this, PaymentActivity::class.java))
         }
 
-        val btnConclude: Button = findViewById(R.id.btn_conclude)
-        btnConclude.setOnClickListener {
+        val btnFinish: Button = findViewById(R.id.btn_finish)
+        btnFinish.setOnClickListener {
             finish()
         }
     }
