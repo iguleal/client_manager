@@ -17,4 +17,5 @@
     <string name="payment_form">forma de pagamento</string>
     <string name="conclude">concluir</string>
     <string name="cancel">cancelar</string>
+    <string name="save">Salvar</string>
 </resources>

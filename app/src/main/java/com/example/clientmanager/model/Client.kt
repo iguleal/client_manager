@@ -3,17 +3,18 @@ package com.example.clientmanager.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity
 data class Client(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "mobile")val mobile: String,
-//    @ColumnInfo(name = "dateStart")val dateStart: Date = Date(),
-//    @ColumnInfo(name = "dateFinish")val dateFinish: Date,
     @ColumnInfo(name = "contact")val contact: String,
     @ColumnInfo(name = "desc")val desc: String,
+
+    //    @ColumnInfo(name = "dateStart")val dateStart: Date = Date(),
+    //    @ColumnInfo(name = "dateFinish")val dateFinish: Date,
+
     @ColumnInfo(name = "isFixed")val isFixed: Boolean = false,
     @ColumnInfo(name = "totalValue")val totalValue: Int = 0,
     @ColumnInfo(name = "cashValue")val cashValue: Int = 0,
