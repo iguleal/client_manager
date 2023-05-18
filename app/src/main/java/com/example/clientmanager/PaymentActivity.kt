@@ -63,6 +63,20 @@ class PaymentActivity : AppCompatActivity() {
                 listInt.add(it.toInt())
             }
         }
+
+        // 200 - 0 - 150 - 50
+
+        val a = listInt[0]
+        val b = listInt[1]
+        val c = listInt[2]
+        val d = listInt[3]
+
+        val calculate = if (a - (b + c + d) == 0) {
+            listInt.add(1)
+        } else {
+            listInt.add(0)
+        }
+
         return listInt
     }
 }

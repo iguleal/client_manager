@@ -1,18 +1,14 @@
 package com.example.clientmanager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.clientmanager.databinding.ActivityClientBinding
-import com.example.clientmanager.databinding.ActivityListBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
-import java.util.ArrayList
 
 class ClientActivity : AppCompatActivity() {
 
@@ -24,8 +20,6 @@ class ClientActivity : AppCompatActivity() {
         binding = ActivityClientBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        paymentList = (intent?.extras?.getIntArray("list") ?: throw IllegalStateException("type not found")) as Array<Int>
-
         val launcherData = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -33,6 +27,10 @@ class ClientActivity : AppCompatActivity() {
             if (result.resultCode == PaymentActivity.RESULT){
 
                     paymentList = result.data?.getIntegerArrayListExtra(PaymentActivity.EXTRA_LIST)!!
+
+                if (paymentList[4] == 1) {
+                    binding.imgPayment.setImageResource(R.drawable.ic_paid)
+                }
 
                 Log.i("teste", paymentList.toString())
             }
@@ -63,12 +61,13 @@ class ClientActivity : AppCompatActivity() {
                     cashValue = paymentList[1],
                     pixValue = paymentList[2],
                     cardValue = paymentList[3],
+                    isPaid = paymentList[4] == 1
                 )
 
                 dao.insert(client)
 
                 runOnUiThread {
-                    Toast.makeText(this,"foi",Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
             }.start()

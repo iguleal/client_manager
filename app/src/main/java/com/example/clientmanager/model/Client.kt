@@ -15,6 +15,7 @@ data class Client(
     //    @ColumnInfo(name = "dateStart")val dateStart: Date = Date(),
     //    @ColumnInfo(name = "dateFinish")val dateFinish: Date,
 
+    @ColumnInfo(name = "isPaid")val isPaid: Boolean = false,
     @ColumnInfo(name = "isFixed")val isFixed: Boolean = false,
     @ColumnInfo(name = "totalValue")val totalValue: Int = 0,
     @ColumnInfo(name = "cashValue")val cashValue: Int = 0,
