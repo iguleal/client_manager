@@ -14,6 +14,9 @@ interface ClientDao {
     @Update
     fun update(client: Client)
 
+    @Query("SELECT * FROM Client")
+    fun getClients(): List<Client>
+
     @Query("SELECT * FROM Client WHERE id = :id")
     fun getClientById(id: Int): Client
 }
