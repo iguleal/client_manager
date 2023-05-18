@@ -44,34 +44,34 @@ class ClientActivity : AppCompatActivity() {
             launcherData.launch(i)
         }
 
-//        binding.btnFinish.setOnClickListener {
-//
-//            val name = binding.editName.text.toString()
-//            val mobile= binding.editMobile.text.toString()
-//            val contact= binding.editContact.text.toString()
-//            val desc= binding.editIssueDesc.text.toString()
-//
-//            Thread {
-//                val app = application as App
-//                val dao = app.db.clientDao()
-//                val client = Client(
-//                    name = name,
-//                    mobile = mobile,
-//                    contact = contact,
-//                    desc = desc,
-//                    totalValue=paymentList[0],
-//                    cashValue = paymentList[1],
-//                    pixValue = paymentList[2],
-//                    cardValue = paymentList[3],
-//                )
-//
-//                dao.insert(client)
-//
-//                runOnUiThread {
-//                    Toast.makeText(this,"foi",Toast.LENGTH_SHORT).show()
-//                }
-//
-//            }.start()
-//        }
+        binding.btnSave.setOnClickListener {
+
+            val name = binding.editName.text.toString()
+            val mobile= binding.editMobile.text.toString()
+            val contact= binding.editContact.text.toString()
+            val desc= binding.editIssueDesc.text.toString()
+
+            Thread {
+                val app = application as App
+                val dao = app.db.clientDao()
+                val client = Client(
+                    name = name,
+                    mobile = mobile,
+                    contact = contact,
+                    desc = desc,
+                    totalValue= paymentList[0],
+                    cashValue = paymentList[1],
+                    pixValue = paymentList[2],
+                    cardValue = paymentList[3],
+                )
+
+                dao.insert(client)
+
+                runOnUiThread {
+                    Toast.makeText(this,"foi",Toast.LENGTH_SHORT).show()
+                }
+
+            }.start()
+        }
     }
 }
