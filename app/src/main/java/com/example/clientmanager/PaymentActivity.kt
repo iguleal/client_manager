@@ -5,17 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clientmanager.databinding.ActivityPaymentBinding
-import com.example.clientmanager.model.App
-import com.example.clientmanager.model.Client
 
 class PaymentActivity : AppCompatActivity() {
 
     companion object{
-        const val EXTRA = "list"
+        const val EXTRA_LIST = "list"
         const val RESULT = 100
     }
 
@@ -38,19 +34,35 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         binding.btnFinish.setOnClickListener {
-//            val totalValue = binding.editTotalValue.text.toString().toInt()
-//            val cash = binding.editCashValue.text.toString().toInt()
-//            val pix = binding.editPixValue.text.toString().toInt()
-//            val card = binding.editCardValue.text.toString().toInt()
 
-//            val paymentList = arrayOf(totalValue,cash, pix, card)
-            val paymentList = "olá"
+            val totalValue = binding.editTotalValue.text.toString()
+            val cash = binding.editCashValue.text.toString()
+            val pix = binding.editPixValue.text.toString()
+            val card = binding.editCardValue.text.toString()
+
+            val list = arrayListOf(totalValue, cash, pix, card)
+
+            val paymentList = validate(list)
 
             setResult(
                 RESULT,
-                Intent().putExtra(EXTRA, paymentList)
+                Intent().putExtra(EXTRA_LIST, paymentList)
             )
             finish()
         }
+    }
+
+    private fun validate(list: List<String>): ArrayList<Int> {
+
+        val listInt = arrayListOf<Int>()
+
+        list.forEach {
+            if (it == "") {
+                listInt.add(0)
+            } else {
+                listInt.add(it.toInt())
+            }
+        }
+        return listInt
     }
 }

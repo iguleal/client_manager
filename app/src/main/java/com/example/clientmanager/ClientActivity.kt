@@ -12,11 +12,12 @@ import com.example.clientmanager.databinding.ActivityClientBinding
 import com.example.clientmanager.databinding.ActivityListBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
+import java.util.ArrayList
 
 class ClientActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClientBinding
-    private var paymentList: String? = null
+    private lateinit var paymentList: ArrayList<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +31,10 @@ class ClientActivity : AppCompatActivity() {
         ) { result ->
 
             if (result.resultCode == PaymentActivity.RESULT){
-               paymentList = result.data?.getStringExtra(PaymentActivity.EXTRA)
-            Toast.makeText(this,paymentList,Toast.LENGTH_SHORT).show()
+
+                    paymentList = result.data?.getIntegerArrayListExtra(PaymentActivity.EXTRA_LIST)!!
+
+                Log.i("teste", paymentList.toString())
             }
         }
 
