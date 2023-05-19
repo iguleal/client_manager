@@ -61,14 +61,26 @@
             android:padding="8dp"
             app:layout_constraintTop_toBottomOf="@id/edit_contact" />
 
+        <CheckBox
+            android:id="@+id/check_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:buttonTint="#00FF2B"
+            android:text="@string/done"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_issue_desc" />
+
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:background="@color/white"
             android:elevation="4dp"
-            app:layout_constraintTop_toBottomOf="@id/edit_issue_desc"
+            app:layout_constraintTop_toBottomOf="@id/check_done"
             tools:layout_editor_absoluteX="24dp" />
 
         <Button
@@ -101,31 +113,6 @@
             app:layout_constraintTop_toBottomOf="@id/btn_payment"
             tools:layout_editor_absoluteX="24dp" />
 
-        <RadioButton
-            android:id="@+id/radio_done"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
-            android:background="@color/white"
-            android:text="@string/done"
-            app:layout_constraintEnd_toStartOf="@+id/edit_date_finished"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-        <EditText
-            android:id="@+id/edit_date_finished"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/white"
-            android:hint="@string/date"
-            android:inputType="date"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/radio_done"
-            app:layout_constraintTop_toBottomOf="@id/view2" />
 
 
         <Button
@@ -140,7 +127,7 @@
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintEnd_toStartOf="@id/btn_save"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_date_finished" />
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <Button
             android:id="@+id/btn_save"

@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.example.clientmanager.databinding.ActivityClientBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
+import java.util.Date
 
 class ClientActivity : AppCompatActivity() {
 
@@ -70,6 +71,7 @@ class ClientActivity : AppCompatActivity() {
                         mobile = mobile,
                         contact = contact,
                         desc = desc,
+                        isFixed = binding.checkDone.isChecked,
                         totalValue = paymentList[0],
                         cashValue = paymentList[1],
                         pixValue = paymentList[2],
@@ -99,6 +101,9 @@ class ClientActivity : AppCompatActivity() {
                         mobile = mobile,
                         contact = contact,
                         desc = desc,
+                        isFixed = binding.checkDone.isChecked,
+                        dateStart = dao.getClientById(clientId).dateStart,
+
 //                        totalValue = paymentList[0],
 //                        cashValue = paymentList[1],
 //                        pixValue = paymentList[2],
@@ -143,7 +148,7 @@ class ClientActivity : AppCompatActivity() {
                 binding.editMobile.setText(client.mobile)
                 binding.editContact.setText(client.contact)
                 binding.editIssueDesc.setText(client.desc)
-                binding.radioDone.isChecked = client.isFixed
+                binding.checkDone.isChecked = client.isFixed
                 if (client.isPaid) binding.imgPayment.setImageResource(R.drawable.ic_paid)
 
             }
