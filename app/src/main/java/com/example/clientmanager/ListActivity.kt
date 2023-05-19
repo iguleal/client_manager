@@ -33,6 +33,11 @@ class ListActivity : AppCompatActivity(), OnClickListener {
         rvList.layoutManager = LinearLayoutManager(this)
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        recreate()
+    }
+
     override fun onClick(id: Int) {
         val i = Intent(this, ClientActivity::class.java)
         i.putExtra("clientId", id)

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clientmanager.model.Client
 
@@ -34,6 +35,7 @@ class ListAdapter(
         private val mobile: TextView = itemView.findViewById(R.id.txt_mobile_name)
         private val cardView: CardView = itemView.findViewById(R.id.cv_list)
         private val date: TextView = itemView.findViewById(R.id.txt_date)
+
         fun bind(itemCurrent: Client) {
             name.text = itemCurrent.name
             mobile.text = itemCurrent.mobile

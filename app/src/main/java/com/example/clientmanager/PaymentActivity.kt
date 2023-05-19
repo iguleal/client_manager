@@ -62,7 +62,7 @@ class PaymentActivity : AppCompatActivity() {
             finish()
         }
     }
-    
+
     private fun onClickClient(clientId: Int) {
         if (clientId == -1){
             return
