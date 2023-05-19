@@ -1,8 +1,10 @@
 package com.example.clientmanager
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -30,9 +32,9 @@ class ClientActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
 
-            if (result.resultCode == PaymentActivity.RESULT){
+            if (result.resultCode == PaymentActivity.RESULT) {
 
-                    paymentList = result.data?.getIntegerArrayListExtra(PaymentActivity.EXTRA_LIST)!!
+                paymentList = result.data?.getIntegerArrayListExtra(PaymentActivity.EXTRA_LIST)!!
 
                 if (paymentList[4] == 1) {
                     binding.imgPayment.setImageResource(R.drawable.ic_paid)
@@ -54,34 +56,64 @@ class ClientActivity : AppCompatActivity() {
         }
 
         binding.btnSave.setOnClickListener {
+            if (clientId == -1) {
+                val name = binding.editName.text.toString()
+                val mobile = binding.editMobile.text.toString()
+                val contact = binding.editContact.text.toString()
+                val desc = binding.editIssueDesc.text.toString()
 
-            val name = binding.editName.text.toString()
-            val mobile= binding.editMobile.text.toString()
-            val contact= binding.editContact.text.toString()
-            val desc= binding.editIssueDesc.text.toString()
+                Thread {
+                    val app = application as App
+                    val dao = app.db.clientDao()
+                    val client = Client(
+                        name = name,
+                        mobile = mobile,
+                        contact = contact,
+                        desc = desc,
+                        totalValue = paymentList[0],
+                        cashValue = paymentList[1],
+                        pixValue = paymentList[2],
+                        cardValue = paymentList[3],
+                        isPaid = paymentList[4] == 1
+                    )
 
-            Thread {
-                val app = application as App
-                val dao = app.db.clientDao()
-                val client = Client(
-                    name = name,
-                    mobile = mobile,
-                    contact = contact,
-                    desc = desc,
-                    totalValue= paymentList[0],
-                    cashValue = paymentList[1],
-                    pixValue = paymentList[2],
-                    cardValue = paymentList[3],
-                    isPaid = paymentList[4] == 1
-                )
+                    dao.insert(client)
 
-                dao.insert(client)
+                    runOnUiThread {
+                        finish()
+                    }
 
-                runOnUiThread {
-                    finish()
-                }
+                }.start()
+            } else {
+                val name = binding.editName.text.toString()
+                val mobile = binding.editMobile.text.toString()
+                val contact = binding.editContact.text.toString()
+                val desc = binding.editIssueDesc.text.toString()
 
-            }.start()
+                Thread {
+                    val app = application as App
+                    val dao = app.db.clientDao()
+                    val client = Client(
+                        id = clientId,
+                        name = name,
+                        mobile = mobile,
+                        contact = contact,
+                        desc = desc,
+//                        totalValue = paymentList[0],
+//                        cashValue = paymentList[1],
+//                        pixValue = paymentList[2],
+//                        cardValue = paymentList[3],
+//                        isPaid = paymentList[4] == 1,
+                    )
+
+                    dao.update(client)
+
+                    runOnUiThread {
+                        finish()
+                    }
+                }.start()
+            }
+
         }
 
         binding.btnCancel.setOnClickListener {
@@ -89,27 +121,30 @@ class ClientActivity : AppCompatActivity() {
         }
     }
 
-    private fun onClickClient(clientId:Int) {
-        if (clientId == -1){
+    override fun onRestart() {
+        super.onRestart()
+        val keyboardService =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        keyboardService.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    private fun onClickClient(clientId: Int) {
+        if (clientId == -1) {
             return
         }
 
-        Thread{
+        Thread {
             val app = application as App
             val dao = app.db.clientDao()
             val client = dao.getClientById(clientId)
 
             runOnUiThread {
-                binding.editName.hint = client.name
-                binding.editName.setHintTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.editMobile.hint = client.mobile
-                binding.editMobile.setHintTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.editContact.hint = client.contact
-                binding.editContact.setHintTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.editIssueDesc.hint = client.desc
-                binding.editIssueDesc.setHintTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.editName.setText(client.name)
+                binding.editMobile.setText(client.mobile)
+                binding.editContact.setText(client.contact)
+                binding.editIssueDesc.setText(client.desc)
                 binding.radioDone.isChecked = client.isFixed
-                if (client.isPaid ) binding.imgPayment.setImageResource(R.drawable.ic_paid)
+                if (client.isPaid) binding.imgPayment.setImageResource(R.drawable.ic_paid)
 
             }
         }.start()

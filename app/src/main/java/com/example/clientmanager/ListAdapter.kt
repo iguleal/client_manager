@@ -43,6 +43,11 @@ class ListAdapter(
             cardView.setOnClickListener {
                 listener.onClick(itemCurrent.id)
             }
+            cardView.setOnLongClickListener {
+                listener.onLongClickListener(itemCurrent,adapterPosition)
+                true
+            }
+
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.clientmanager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clientmanager.databinding.ActivityListBinding
@@ -44,12 +45,30 @@ class ListActivity : AppCompatActivity(), OnClickListener {
         startActivity(i)
     }
 
-    override fun onLongClickListener() {
+    override fun onLongClickListener(client: Client, position: Int) {
+        AlertDialog.Builder(this)
+            .setMessage(R.string.delete_message)
+            .setNegativeButton(R.string.cancel) { _, _ ->
+            }
+            .setNeutralButton(R.string.delete) { _, _ ->
+                Thread{
+                    val app = application as App
+                    val dao = app.db.clientDao()
+                    dao.delete(client)
+                    runOnUiThread {
+                        listClient.removeAt(position)
+                        adapter.notifyItemRemoved(position)
+                    }
+                }.start()
+            }
+            .create()
+            .show()
+
 
     }
 
     private fun queryClient() {
-        Thread{
+        Thread {
             val app = application as App
             val dao = app.db.clientDao()
             val response = dao.getClients()
