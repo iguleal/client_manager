@@ -36,6 +36,8 @@ class ClientActivity : AppCompatActivity() {
 
                 if (paymentList[4] == 1) {
                     binding.imgPayment.setImageResource(R.drawable.ic_paid)
+                } else if (paymentList[4] == 0) {
+                    binding.imgPayment.setImageResource(R.drawable.ic_not_paid)
                 }
             }
         }
