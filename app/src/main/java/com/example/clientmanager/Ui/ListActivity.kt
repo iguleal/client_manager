@@ -1,25 +1,30 @@
-package com.example.clientmanager
+package com.example.clientmanager.Ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clientmanager.Constants
+import com.example.clientmanager.ListAdapter
+import com.example.clientmanager.OnClickListener
+import com.example.clientmanager.R
 import com.example.clientmanager.databinding.ActivityListBinding
-import com.example.clientmanager.databinding.ActivityMainBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
 
 class ListActivity : AppCompatActivity(), OnClickListener {
 
-    lateinit var binding: ActivityListBinding
-    var listClient = mutableListOf<Client>()
-    lateinit var adapter: ListAdapter
+    private lateinit var binding: ActivityListBinding
+    private var listClient = mutableListOf<Client>()
+    private lateinit var adapter: ListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val rvList: RecyclerView = findViewById(R.id.rv_list)
 
         binding.floatingCreatePerson.setOnClickListener {
@@ -27,7 +32,16 @@ class ListActivity : AppCompatActivity(), OnClickListener {
             startActivity(i)
         }
 
-        queryClient()
+        val titleMainItem =
+            intent?.extras?.getString("title") ?: throw Exception(" title not found ")
+
+        when (titleMainItem) {
+            Constants.TITLE.CLIENTS -> queryAllClient()
+            Constants.TITLE.SERVICES -> queryClientsByFix(false)
+            Constants.TITLE.FIXED -> queryClientsByFix(true)
+            Constants.TITLE.NOT_PAID -> queryClientsByPaid(false)
+            Constants.TITLE.PAID -> queryClientsByPaid(true)
+        }
 
         adapter = ListAdapter(listClient, this)
         rvList.adapter = adapter
@@ -67,11 +81,39 @@ class ListActivity : AppCompatActivity(), OnClickListener {
 
     }
 
-    private fun queryClient() {
+    private fun queryAllClient() {
         Thread {
             val app = application as App
             val dao = app.db.clientDao()
             val response = dao.getClients()
+
+            runOnUiThread {
+                listClient.addAll(response)
+                adapter.notifyDataSetChanged()
+            }
+
+        }.start()
+    }
+
+    private fun queryClientsByFix(isFixed: Boolean) {
+        Thread {
+            val app = application as App
+            val dao = app.db.clientDao()
+            val response = dao.getClientByFix(isFixed)
+
+            runOnUiThread {
+                listClient.addAll(response)
+                adapter.notifyDataSetChanged()
+            }
+
+        }.start()
+    }
+
+    private fun queryClientsByPaid(isPaid: Boolean) {
+        Thread {
+            val app = application as App
+            val dao = app.db.clientDao()
+            val response = dao.getClientByPaid(isPaid)
 
             runOnUiThread {
                 listClient.addAll(response)

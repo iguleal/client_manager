@@ -20,4 +20,5 @@
     <string name="save">Salvar</string>
     <string name="delete">Excluir</string>
     <string name="delete_message">Deseja excluir?</string>
+    <string name="clients">CLIENTES</string>
 </resources>

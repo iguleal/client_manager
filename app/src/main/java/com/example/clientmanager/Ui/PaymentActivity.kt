@@ -1,4 +1,4 @@
-package com.example.clientmanager
+package com.example.clientmanager.Ui
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.example.clientmanager.R
 import com.example.clientmanager.databinding.ActivityPaymentBinding
 import com.example.clientmanager.model.App
 

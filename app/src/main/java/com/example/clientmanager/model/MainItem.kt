@@ -1,4 +1,4 @@
-package com.example.clientmanager
+package com.example.clientmanager.model
 
 data class MainItem(
     val id: Int,

@@ -13,17 +13,17 @@
         android:theme="@style/Theme.ClientManager"
         tools:targetApi="31">
         <activity
-            android:name=".PaymentActivity"
+            android:name=".Ui.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ClientActivity"
+            android:name=".Ui.ClientActivity"
             android:exported="true" >
         </activity>
         <activity
-            android:name=".ListActivity"
+            android:name=".Ui.ListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

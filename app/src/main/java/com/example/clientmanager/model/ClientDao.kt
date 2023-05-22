@@ -19,4 +19,10 @@ interface ClientDao {
 
     @Query("SELECT * FROM Client WHERE id = :id")
     fun getClientById(id: Int): Client
+
+    @Query("SELECT * FROM Client WHERE isFixed = :isFixed")
+    fun getClientByFix(isFixed: Boolean): List<Client>
+
+    @Query("SELECT * FROM Client WHERE isPaid = :isPaid")
+    fun getClientByPaid(isPaid: Boolean): List<Client>
 }

@@ -1,4 +1,4 @@
-package com.example.clientmanager
+package com.example.clientmanager.Ui
 
 import android.app.Activity
 import android.content.Context
@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.clientmanager.R
 import com.example.clientmanager.databinding.ActivityClientBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class ClientActivity : AppCompatActivity() {
 
@@ -141,38 +139,38 @@ class ClientActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.checkDone.setOnCheckedChangeListener { it, b ->
-            if (clientId == -1) {
-                return@setOnCheckedChangeListener
-            }
-
-            Thread {
-                val app = application as App
-                val dao = app.db.clientDao()
-                val client = dao.getClientById(clientId)
-
-                dao.update(
-                    Client(
-                        id = clientId,
-                        name = client.name,
-                        mobile = client.mobile,
-                        contact = client.contact,
-                        desc = client.desc,
-                        dateFinish = Date()
-                    )
-                )
-                runOnUiThread {
-                    if (it.isChecked) {
-                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
-                        val date = sdf.format(client.dateFinish)
-
-                        binding.txtDateFinished.text = date
-                    } else {
-                        binding.txtDateFinished.text = ""
-                    }
-                }
-            }.start()
-        }
+//        binding.checkDone.setOnCheckedChangeListener { it, b ->
+//            if (clientId == -1) {
+//                return@setOnCheckedChangeListener
+//            }
+//
+//            Thread {
+//                val app = application as App
+//                val dao = app.db.clientDao()
+//                val client = dao.getClientById(clientId)
+//
+//                dao.update(
+//                    Client(
+//                        id = clientId,
+//                        name = client.name,
+//                        mobile = client.mobile,
+//                        contact = client.contact,
+//                        desc = client.desc,
+//                        dateFinish = Date()
+//                    )
+//                )
+//                runOnUiThread {
+//                    if (it.isChecked) {
+//                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
+//                        val date = sdf.format(client.dateFinish)
+//
+//                        binding.txtDateFinished.text = date
+//                    } else {
+//                        binding.txtDateFinished.text = ""
+//                    }
+//                }
+//            }.start()
+//        }
 
     }
 
