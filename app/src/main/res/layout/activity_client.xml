@@ -72,6 +72,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_issue_desc" />
 
+        <TextView
+            android:id="@+id/txt_date_finished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/check_done"
+            app:layout_constraintStart_toEndOf="@+id/check_done"
+            app:layout_constraintTop_toTopOf="@id/check_done"
+            tools:text="08/05/1996" />
+
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"

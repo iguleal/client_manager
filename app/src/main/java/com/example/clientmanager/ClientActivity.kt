@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.clientmanager.databinding.ActivityClientBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ClientActivity : AppCompatActivity() {
 
@@ -70,11 +73,11 @@ class ClientActivity : AppCompatActivity() {
                         contact = contact,
                         desc = desc,
                         isFixed = binding.checkDone.isChecked,
-                        totalValue = paymentList[0],
-                        cashValue = paymentList[1],
-                        pixValue = paymentList[2],
-                        cardValue = paymentList[3],
-                        isPaid = paymentList[4] == 1
+                        totalValue = if (paymentList.isNotEmpty()) paymentList[0] else 0,
+                        cashValue = if (paymentList.isNotEmpty()) paymentList[1] else 0,
+                        pixValue = if (paymentList.isNotEmpty()) paymentList[2] else 0,
+                        cardValue = if (paymentList.isNotEmpty()) paymentList[3] else 0,
+                        isPaid = if (paymentList.isNotEmpty()){ paymentList[4] == 1} else false
                     )
 
                     dao.insert(client)
@@ -137,6 +140,40 @@ class ClientActivity : AppCompatActivity() {
         binding.btnCancel.setOnClickListener {
             finish()
         }
+
+        binding.checkDone.setOnCheckedChangeListener { it, b ->
+            if (clientId == -1) {
+                return@setOnCheckedChangeListener
+            }
+
+            Thread {
+                val app = application as App
+                val dao = app.db.clientDao()
+                val client = dao.getClientById(clientId)
+
+                dao.update(
+                    Client(
+                        id = clientId,
+                        name = client.name,
+                        mobile = client.mobile,
+                        contact = client.contact,
+                        desc = client.desc,
+                        dateFinish = Date()
+                    )
+                )
+                runOnUiThread {
+                    if (it.isChecked) {
+                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
+                        val date = sdf.format(client.dateFinish)
+
+                        binding.txtDateFinished.text = date
+                    } else {
+                        binding.txtDateFinished.text = ""
+                    }
+                }
+            }.start()
+        }
+
     }
 
     override fun onRestart() {
