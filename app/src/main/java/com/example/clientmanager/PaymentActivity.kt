@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.clientmanager.databinding.ActivityPaymentBinding
 import com.example.clientmanager.model.App
 
@@ -74,14 +73,10 @@ class PaymentActivity : AppCompatActivity() {
             val client = dao.getClientById(clientId)
 
             runOnUiThread {
-                binding.editTotalValue.hint = client.totalValue.toString()
-                binding.editTotalValue.setHintTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.editCashValue.hint = client.cashValue.toString()
-                binding.editCashValue.setHintTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.editPixValue.hint = client.pixValue.toString()
-                binding.editPixValue.setHintTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.editCardValue.hint = client.cardValue.toString()
-                binding.editCardValue.setHintTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.editTotalValue.setText(client.totalValue.toString())
+                binding.editCashValue.setText(client.cashValue.toString())
+                binding.editPixValue.setText(client.pixValue.toString())
+                binding.editCardValue.setText(client.cardValue.toString())
             }
         }.start()
     }
@@ -98,14 +93,12 @@ class PaymentActivity : AppCompatActivity() {
             }
         }
 
-        // 200 - 0 - 150 - 50
-
         val a = listInt[0]
         val b = listInt[1]
         val c = listInt[2]
         val d = listInt[3]
 
-        val calculate = if (a - (b + c + d) == 0) {
+        if (a - (b + c + d) == 0) {
             listInt.add(1)
         } else {
             listInt.add(0)

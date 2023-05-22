@@ -1,23 +1,20 @@
 package com.example.clientmanager
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.clientmanager.databinding.ActivityClientBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
-import java.util.Date
 
 class ClientActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClientBinding
-    private lateinit var paymentList: ArrayList<Int>
+    private var paymentList = arrayListOf<Int>()
     private var clientId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +37,6 @@ class ClientActivity : AppCompatActivity() {
                 if (paymentList[4] == 1) {
                     binding.imgPayment.setImageResource(R.drawable.ic_paid)
                 }
-
             }
         }
 
@@ -52,7 +48,7 @@ class ClientActivity : AppCompatActivity() {
             } else {
                 val i = Intent(this, PaymentActivity::class.java)
                 i.putExtra("clientId", clientId)
-                startActivity(i)
+                launcherData.launch(i)
             }
         }
 
@@ -95,6 +91,21 @@ class ClientActivity : AppCompatActivity() {
                 Thread {
                     val app = application as App
                     val dao = app.db.clientDao()
+
+                    var totalValue = dao.getClientById(clientId).totalValue
+                    var cash = dao.getClientById(clientId).cashValue
+                    var pix = dao.getClientById(clientId).pixValue
+                    var card = dao.getClientById(clientId).cardValue
+                    var isPaid = dao.getClientById(clientId).isPaid
+
+                    if (paymentList.isNotEmpty()) {
+                        totalValue = paymentList[0]
+                        cash = paymentList[1]
+                        pix = paymentList[2]
+                        card = paymentList[3]
+                        isPaid = paymentList[4] == 1
+                    }
+
                     val client = Client(
                         id = clientId,
                         name = name,
@@ -104,11 +115,12 @@ class ClientActivity : AppCompatActivity() {
                         isFixed = binding.checkDone.isChecked,
                         dateStart = dao.getClientById(clientId).dateStart,
 
-//                        totalValue = paymentList[0],
-//                        cashValue = paymentList[1],
-//                        pixValue = paymentList[2],
-//                        cardValue = paymentList[3],
-//                        isPaid = paymentList[4] == 1,
+                        totalValue = totalValue,
+                        cashValue = cash,
+                        pixValue = pix,
+                        cardValue = card,
+
+                        isPaid = isPaid
                     )
 
                     dao.update(client)
@@ -118,7 +130,6 @@ class ClientActivity : AppCompatActivity() {
                     }
                 }.start()
             }
-
         }
 
         binding.btnCancel.setOnClickListener {
@@ -128,9 +139,10 @@ class ClientActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        val keyboardService =
-            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        keyboardService.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        binding.view.requestFocus()
+        hideKeyboard(this)
+
     }
 
     private fun onClickClient(clientId: Int) {
@@ -153,5 +165,11 @@ class ClientActivity : AppCompatActivity() {
 
             }
         }.start()
+    }
+
+    private fun hideKeyboard(activity: Activity) {
+        val inputMethodManager =
+            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(activity.currentFocus?.windowToken, 0)
     }
 }

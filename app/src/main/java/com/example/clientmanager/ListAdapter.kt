@@ -8,6 +8,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clientmanager.model.Client
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ListAdapter(
     private val listClient: List<Client>,
@@ -34,11 +36,15 @@ class ListAdapter(
         private val name: TextView = itemView.findViewById(R.id.txt_client_name)
         private val mobile: TextView = itemView.findViewById(R.id.txt_mobile_name)
         private val cardView: CardView = itemView.findViewById(R.id.cv_list)
-        private val date: TextView = itemView.findViewById(R.id.txt_date)
+        private val dateCover: TextView = itemView.findViewById(R.id.txt_date)
 
         fun bind(itemCurrent: Client) {
             name.text = itemCurrent.name
             mobile.text = itemCurrent.mobile
+
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
+            val date = sdf.format(itemCurrent.dateStart)
+            dateCover.text = date
 
             cardView.setOnClickListener {
                 listener.onClick(itemCurrent.id)

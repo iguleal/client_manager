@@ -12,8 +12,10 @@ data class Client(
     @ColumnInfo(name = "mobile") val mobile: String,
     @ColumnInfo(name = "contact") val contact: String,
     @ColumnInfo(name = "desc") val desc: String,
+
     @ColumnInfo(name = "dateStart") val dateStart: Date = Date(),
     @ColumnInfo(name = "dateFinish") val dateFinish: Date = Date(),
+
     @ColumnInfo(name = "isPaid") val isPaid: Boolean = false,
     @ColumnInfo(name = "isFixed") val isFixed: Boolean = false,
     @ColumnInfo(name = "totalValue") val totalValue: Int = 0,
