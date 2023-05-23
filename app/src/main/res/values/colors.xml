@@ -5,9 +5,6 @@
     <color name="coral">#ed9080</color>
     <color name="nude">#f0ece2</color>
 
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
