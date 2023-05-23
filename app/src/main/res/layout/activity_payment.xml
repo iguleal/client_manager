@@ -4,32 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2C3E50">
+    android:background="@color/bordo">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:padding="32dp"
+        android:layout_marginBottom="32dp"
         tools:context=".ui.PaymentActivity">
+
+        <TextView
+            android:id="@+id/txt_total_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/total_value"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <EditText
             android:id="@+id/edit_total_value"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/white"
-            android:hint="@string/total_value"
+            android:layout_marginTop="8dp"
+            android:background="@color/nude"
+            android:hint="@string/value"
             android:inputType="number"
             android:padding="8dp"
             android:textAlignment="center"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_total_value" />
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="16dp"
-            android:background="@color/white"
+            android:background="@color/bordo_claro"
             android:elevation="4dp"
             app:layout_constraintTop_toBottomOf="@id/edit_total_value" />
 
@@ -48,7 +61,7 @@
             android:id="@+id/edit_cash_value"
             android:layout_width="200dp"
             android:layout_height="48dp"
-            android:background="@color/white"
+            android:background="@color/nude"
             android:hint="@string/value"
             android:inputType="number"
             android:textAlignment="center"
@@ -61,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="32dp"
-            android:background="@color/white"
+            android:background="@color/bordo_claro"
             android:elevation="4dp"
             app:layout_constraintTop_toBottomOf="@id/txt_cash" />
 
@@ -80,7 +93,7 @@
             android:id="@+id/edit_pix_value"
             android:layout_width="200dp"
             android:layout_height="48dp"
-            android:background="@color/white"
+            android:background="@color/nude"
             android:hint="@string/value"
             android:inputType="number"
             android:textAlignment="center"
@@ -93,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="32dp"
-            android:background="@color/white"
+            android:background="@color/bordo_claro"
             android:elevation="4dp"
             app:layout_constraintTop_toBottomOf="@id/txt_pix" />
 
@@ -112,7 +125,7 @@
             android:id="@+id/edit_card_value"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:background="@color/white"
+            android:background="@color/nude"
             android:hint="@string/value"
             android:inputType="number"
             android:textAlignment="center"
@@ -140,7 +153,7 @@
                 android:id="@+id/auto_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/nude"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -150,12 +163,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:backgroundTint="#f00"
-            android:text="@string/cancel"
             android:layout_marginEnd="4dp"
-            app:layout_constraintHorizontal_weight="3"
-            app:layout_constraintHorizontal_chainStyle="spread"
+            android:backgroundTint="@color/bordo_claro"
+            android:text="@string/cancel"
             app:layout_constraintEnd_toStartOf="@id/btn_finish"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_card" />
 
@@ -163,13 +176,13 @@
             android:id="@+id/btn_finish"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:backgroundTint="@color/black"
             android:text="@string/finish"
-            app:layout_constraintHorizontal_weight="5"
-            android:layout_marginStart="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_cancel"
-            app:layout_constraintStart_toEndOf="@id/btn_cancel" />
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel"
+            app:layout_constraintTop_toTopOf="@+id/btn_cancel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

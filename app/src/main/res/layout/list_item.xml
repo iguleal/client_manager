@@ -4,7 +4,7 @@
     android:id="@+id/cv_list"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    app:cardBackgroundColor="#dddddd"
+    app:cardBackgroundColor="@color/nude"
     android:layout_margin="8dp"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -17,6 +17,7 @@
             android:id="@+id/txt_client_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabin"
             android:text="Name Name Name"
             android:textColor="@color/black"
             android:textSize="24sp"

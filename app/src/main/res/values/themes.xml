@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.ClientManager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">#2C3E50</item>
+        <item name="colorPrimary">@color/bordo_claro</item>
+        <item name="colorPrimaryVariant">@color/bordo</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

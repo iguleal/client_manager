@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2C3E50"
+    android:background="@color/bordo"
     tools:context=".ui.ListActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -28,9 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/bordo_claro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_person_add_24" />
+        android:src="@drawable/ic_add_client"
+        app:borderWidth="0dp"
+        app:tint="@color/nude" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
     <string name="paid_value">Valor pago</string>
     <string name="done">Resolvido</string>
     <string name="next">Próximo</string>
-    <string name="value">Valor</string>
+    <string name="value">R$</string>
     <string name="pix">PIX</string>
     <string name="finish">Finalizar</string>
     <string name="payment_form">forma de pagamento</string>
@@ -19,6 +19,6 @@
     <string name="cancel">cancelar</string>
     <string name="save">Salvar</string>
     <string name="delete">Excluir</string>
-    <string name="delete_message">Deseja excluir?</string>
+    <string name="delete_message">O que deseja fazer?</string>
     <string name="clients">CLIENTES</string>
 </resources>

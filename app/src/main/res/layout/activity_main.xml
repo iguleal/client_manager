@@ -5,7 +5,7 @@
     android:id="@+id/container_client"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2C3E50"
+    android:background="@color/bordo"
     tools:context=".ui.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_height="150dp"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintVertical_chainStyle="packed"
-        android:background="#dddddd"
+        android:background="@color/nude"
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/rv_main"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,6 +25,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_clients"
+            app:tint="@color/bordo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +37,7 @@
             android:layout_marginBottom="32dp"
             android:text="@string/clients"
             android:textSize="20sp"
+            android:fontFamily="@font/cabin"
             app:layout_constraintEnd_toEndOf="@+id/ic_clients"
             app:layout_constraintStart_toStartOf="@+id/ic_clients"
             app:layout_constraintTop_toBottomOf="@+id/ic_clients" />
@@ -48,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_client" />
 

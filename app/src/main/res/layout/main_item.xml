@@ -10,7 +10,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#dddddd"
+        android:background="@color/nude"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -19,6 +19,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_clients"
+            app:tint="@color/bordo"
             app:layout_constraintBottom_toTopOf="@+id/txt_icon_name"
             app:layout_constraintEnd_toEndOf="@+id/container"
             app:layout_constraintStart_toStartOf="@+id/container"
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="title"
+            android:fontFamily="@font/cabin"
             android:textSize="20sp"
             android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="@+id/container"
