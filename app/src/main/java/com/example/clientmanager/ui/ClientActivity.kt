@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.clientmanager.Constants
+import com.example.clientmanager.ListAdapter
 import com.example.clientmanager.R
 import com.example.clientmanager.databinding.ActivityClientBinding
 import com.example.clientmanager.model.App
@@ -90,6 +92,7 @@ class ClientActivity : AppCompatActivity() {
                     dao.insert(client)
 
                     runOnUiThread {
+                        //avisar pra list activity atualizar a lista
                         finish()
                     }
 

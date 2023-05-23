@@ -2,6 +2,7 @@ package com.example.clientmanager.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -68,6 +69,11 @@ class ListActivity : AppCompatActivity(), OnClickListener {
         adapter = ListAdapter(listClient, this)
         rvList.adapter = adapter
         rvList.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        recreate()
     }
 
     override fun onClick(id: Int) {
