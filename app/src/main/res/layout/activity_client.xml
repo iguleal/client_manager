@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="32dp"
-        tools:context=".Ui.ClientActivity">
+        tools:context=".ui.ClientActivity">
 
         <EditText
             android:id="@+id/edit_name"

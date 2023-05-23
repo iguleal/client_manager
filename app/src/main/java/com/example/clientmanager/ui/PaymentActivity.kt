@@ -1,4 +1,4 @@
-package com.example.clientmanager.Ui
+package com.example.clientmanager.ui
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.example.clientmanager.Constants
 import com.example.clientmanager.R
 import com.example.clientmanager.databinding.ActivityPaymentBinding
 import com.example.clientmanager.model.App
@@ -18,7 +19,8 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private lateinit var binding : ActivityPaymentBinding
-    private var clientId: Int = -1
+    private var clientId: Int = Constants.CLIENT.NEW_CLIENT
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPaymentBinding.inflate(layoutInflater)
@@ -36,7 +38,7 @@ class PaymentActivity : AppCompatActivity() {
             keyboardService.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
 
-        clientId = intent?.extras?.getInt("clientId") ?: -1
+        clientId = intent?.extras?.getInt("clientId") ?: Constants.CLIENT.NEW_CLIENT
 
         onClickClient(clientId)
 
@@ -46,8 +48,10 @@ class PaymentActivity : AppCompatActivity() {
             val cash = binding.editCashValue.text.toString()
             val pix = binding.editPixValue.text.toString()
             val card = binding.editCardValue.text.toString()
+            val cardTimes = binding.autoCard.text.toString()
 
-            val list = arrayListOf(totalValue, cash, pix, card)
+
+            val list = arrayListOf(totalValue, cash, pix, card, cardTimes)
 
             val paymentList = validate(list)
 
@@ -64,7 +68,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun onClickClient(clientId: Int) {
-        if (clientId == -1){
+        if (clientId == Constants.CLIENT.NEW_CLIENT){
             return
         }
 
@@ -78,6 +82,7 @@ class PaymentActivity : AppCompatActivity() {
                 binding.editCashValue.setText(client.cashValue.toString())
                 binding.editPixValue.setText(client.pixValue.toString())
                 binding.editCardValue.setText(client.cardValue.toString())
+                binding.autoCard.setText(client.cardTimes.toString())
             }
         }.start()
     }
@@ -94,15 +99,16 @@ class PaymentActivity : AppCompatActivity() {
             }
         }
 
-        val a = listInt[0]
-        val b = listInt[1]
-        val c = listInt[2]
-        val d = listInt[3]
+        val totalValue = listInt[0]
+        val cash = listInt[1]
+        val pix = listInt[2]
+        val card = listInt[3]
+        val times = listInt[4]
 
-        if (a - (b + c + d) == 0) {
-            listInt.add(1)
+        if (totalValue - (cash + pix + (card * times)) == 0) {
+            listInt.add(Constants.CLIENT.PAID_TRUE)
         } else {
-            listInt.add(0)
+            listInt.add(Constants.CLIENT.PAID_FALSE)
         }
 
         return listInt

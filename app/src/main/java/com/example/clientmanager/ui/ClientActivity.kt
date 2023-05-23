@@ -1,4 +1,4 @@
-package com.example.clientmanager.Ui
+package com.example.clientmanager.ui
 
 import android.app.Activity
 import android.content.Context
@@ -7,23 +7,27 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.clientmanager.Constants
 import com.example.clientmanager.R
 import com.example.clientmanager.databinding.ActivityClientBinding
 import com.example.clientmanager.model.App
 import com.example.clientmanager.model.Client
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ClientActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClientBinding
     private var paymentList = arrayListOf<Int>()
-    private var clientId: Int = -1
+    private var clientId: Int = Constants.CLIENT.NEW_CLIENT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClientBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        clientId = intent?.extras?.getInt("clientId") ?: -1
+        clientId = intent?.extras?.getInt("clientId") ?: Constants.CLIENT.NEW_CLIENT
 
         onClickClient(clientId)
 
@@ -35,9 +39,9 @@ class ClientActivity : AppCompatActivity() {
 
                 paymentList = result.data?.getIntegerArrayListExtra(PaymentActivity.EXTRA_LIST)!!
 
-                if (paymentList[4] == 1) {
+                if (paymentList[5] == Constants.CLIENT.PAID_TRUE) {
                     binding.imgPayment.setImageResource(R.drawable.ic_paid)
-                } else if (paymentList[4] == 0) {
+                } else if (paymentList[5] == Constants.CLIENT.PAID_FALSE) {
                     binding.imgPayment.setImageResource(R.drawable.ic_not_paid)
                 }
             }
@@ -45,7 +49,7 @@ class ClientActivity : AppCompatActivity() {
 
         binding.btnPayment.setOnClickListener {
 
-            if (clientId == -1) {
+            if (clientId == Constants.CLIENT.NEW_CLIENT) {
                 val i = Intent(this@ClientActivity, PaymentActivity::class.java)
                 launcherData.launch(i)
             } else {
@@ -56,7 +60,7 @@ class ClientActivity : AppCompatActivity() {
         }
 
         binding.btnSave.setOnClickListener {
-            if (clientId == -1) {
+            if (clientId == Constants.CLIENT.NEW_CLIENT) {
                 val name = binding.editName.text.toString()
                 val mobile = binding.editMobile.text.toString()
                 val contact = binding.editContact.text.toString()
@@ -75,7 +79,12 @@ class ClientActivity : AppCompatActivity() {
                         cashValue = if (paymentList.isNotEmpty()) paymentList[1] else 0,
                         pixValue = if (paymentList.isNotEmpty()) paymentList[2] else 0,
                         cardValue = if (paymentList.isNotEmpty()) paymentList[3] else 0,
-                        isPaid = if (paymentList.isNotEmpty()){ paymentList[4] == 1} else false
+                        cardTimes = if (paymentList.isNotEmpty()) paymentList[4] else 0,
+                        isPaid = if (paymentList.isNotEmpty()) {
+                            paymentList[5] == Constants.CLIENT.PAID_TRUE
+                        } else {
+                            false
+                        }
                     )
 
                     dao.insert(client)
@@ -99,6 +108,7 @@ class ClientActivity : AppCompatActivity() {
                     var cash = dao.getClientById(clientId).cashValue
                     var pix = dao.getClientById(clientId).pixValue
                     var card = dao.getClientById(clientId).cardValue
+                    var cardTimes = dao.getClientById(clientId).cardTimes
                     var isPaid = dao.getClientById(clientId).isPaid
 
                     if (paymentList.isNotEmpty()) {
@@ -106,7 +116,8 @@ class ClientActivity : AppCompatActivity() {
                         cash = paymentList[1]
                         pix = paymentList[2]
                         card = paymentList[3]
-                        isPaid = paymentList[4] == 1
+                        cardTimes = paymentList[4]
+                        isPaid = paymentList[5] == Constants.CLIENT.PAID_TRUE
                     }
 
                     val client = Client(
@@ -117,12 +128,11 @@ class ClientActivity : AppCompatActivity() {
                         desc = desc,
                         isFixed = binding.checkDone.isChecked,
                         dateStart = dao.getClientById(clientId).dateStart,
-
                         totalValue = totalValue,
                         cashValue = cash,
                         pixValue = pix,
                         cardValue = card,
-
+                        cardTimes = cardTimes,
                         isPaid = isPaid
                     )
 
@@ -139,38 +149,46 @@ class ClientActivity : AppCompatActivity() {
             finish()
         }
 
-//        binding.checkDone.setOnCheckedChangeListener { it, b ->
-//            if (clientId == -1) {
-//                return@setOnCheckedChangeListener
-//            }
-//
-//            Thread {
-//                val app = application as App
-//                val dao = app.db.clientDao()
-//                val client = dao.getClientById(clientId)
-//
-//                dao.update(
-//                    Client(
-//                        id = clientId,
-//                        name = client.name,
-//                        mobile = client.mobile,
-//                        contact = client.contact,
-//                        desc = client.desc,
-//                        dateFinish = Date()
-//                    )
-//                )
-//                runOnUiThread {
-//                    if (it.isChecked) {
-//                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
-//                        val date = sdf.format(client.dateFinish)
-//
-//                        binding.txtDateFinished.text = date
-//                    } else {
-//                        binding.txtDateFinished.text = ""
-//                    }
-//                }
-//            }.start()
-//        }
+        binding.checkDone.setOnCheckedChangeListener { it, b ->
+            if (clientId == Constants.CLIENT.NEW_CLIENT) {
+                return@setOnCheckedChangeListener
+            }
+
+            Thread {
+                val app = application as App
+                val dao = app.db.clientDao()
+                val client = dao.getClientById(clientId)
+
+                dao.update(
+                    Client(
+                        id = client.id,
+                        name = client.name,
+                        mobile = client.mobile,
+                        contact = client.contact,
+                        desc = client.desc,
+                        dateFinish = Date(),
+                        dateStart = client.dateStart,
+                        isPaid = client.isPaid,
+                        isFixed = client.isFixed,
+                        totalValue = client.totalValue,
+                        cashValue = client.cashValue,
+                        pixValue = client.pixValue,
+                        cardValue = client.cardValue,
+                        cardTimes = client.cardTimes
+                    )
+                )
+                runOnUiThread {
+                    if (it.isChecked) {
+                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
+                        val date = sdf.format(client.dateFinish)
+
+                        binding.txtDateFinished.text = date
+                    } else {
+                        binding.txtDateFinished.text = ""
+                    }
+                }
+            }.start()
+        }
 
     }
 
@@ -183,7 +201,7 @@ class ClientActivity : AppCompatActivity() {
     }
 
     private fun onClickClient(clientId: Int) {
-        if (clientId == -1) {
+        if (clientId == Constants.CLIENT.NEW_CLIENT) {
             return
         }
 

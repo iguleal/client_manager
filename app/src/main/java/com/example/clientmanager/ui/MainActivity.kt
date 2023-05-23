@@ -1,4 +1,4 @@
-package com.example.clientmanager.Ui
+package com.example.clientmanager.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -36,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         val adapter = MainAdapter(listItem) { title ->
             when (title) {
                 Constants.TITLE.SERVICES -> {
+                    val i = Intent(this@MainActivity, ListActivity::class.java)
+                    i.putExtra("title", title)
+                    startActivity(i)
+                }
+
+                Constants.TITLE.FIXED -> {
                     val i = Intent(this@MainActivity, ListActivity::class.java)
                     i.putExtra("title", title)
                     startActivity(i)

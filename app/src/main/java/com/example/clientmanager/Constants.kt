@@ -9,4 +9,11 @@ class Constants {
         val NOT_PAID = "À PAGAR"
         val PAID = "FATURADO"
     }
+
+    object CLIENT {
+        val NEW_CLIENT = -1
+        val PAID_TRUE = 1
+        val PAID_FALSE = 0
+    }
+
 }

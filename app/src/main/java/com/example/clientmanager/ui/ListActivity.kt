@@ -1,7 +1,8 @@
-package com.example.clientmanager.Ui
+package com.example.clientmanager.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,13 +36,36 @@ class ListActivity : AppCompatActivity(), OnClickListener {
         val titleMainItem =
             intent?.extras?.getString("title") ?: throw Exception(" title not found ")
 
+        actionBar(titleMainItem)
+
         when (titleMainItem) {
-            Constants.TITLE.CLIENTS -> queryAllClient()
-            Constants.TITLE.SERVICES -> queryClientsByFix(false)
-            Constants.TITLE.FIXED -> queryClientsByFix(true)
-            Constants.TITLE.NOT_PAID -> queryClientsByPaid(false)
-            Constants.TITLE.PAID -> queryClientsByPaid(true)
+            Constants.TITLE.CLIENTS -> {
+                binding.floatingCreatePerson.visibility = View.VISIBLE
+                queryAllClient()
+            }
+
+            Constants.TITLE.SERVICES -> {
+                binding.floatingCreatePerson.visibility = View.GONE
+                queryClientsByFix(false)
+            }
+
+            Constants.TITLE.FIXED -> {
+                binding.floatingCreatePerson.visibility = View.GONE
+                queryClientsByFix(true)
+            }
+
+            Constants.TITLE.NOT_PAID -> {
+                binding.floatingCreatePerson.visibility = View.GONE
+                queryClientsByPaid(false)
+            }
+
+            Constants.TITLE.PAID -> {
+                binding.floatingCreatePerson.visibility = View.GONE
+                queryClientsByPaid(true)
+            }
         }
+
+
 
         adapter = ListAdapter(listClient, this)
         rvList.adapter = adapter
@@ -79,6 +103,13 @@ class ListActivity : AppCompatActivity(), OnClickListener {
             .show()
 
 
+    }
+
+    private fun actionBar(titleMainItem: String) {
+        setSupportActionBar(binding.toolbarList)
+        supportActionBar?.title = titleMainItem
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun queryAllClient() {
