@@ -65,16 +65,9 @@ class ListActivity : AppCompatActivity(), OnClickListener {
             }
         }
 
-
-
         adapter = ListAdapter(listClient, this)
         rvList.adapter = adapter
         rvList.layoutManager = LinearLayoutManager(this)
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        recreate()
     }
 
     override fun onClick(id: Int) {
@@ -101,8 +94,6 @@ class ListActivity : AppCompatActivity(), OnClickListener {
             }
             .create()
             .show()
-
-
     }
 
     private fun actionBar(titleMainItem: String) {

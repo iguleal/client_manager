@@ -13,18 +13,7 @@
         android:theme="@style/Theme.ClientManager"
         tools:targetApi="31">
         <activity
-            android:name=".ui.PaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.ClientActivity"
-            android:exported="true" >
-        </activity>
-        <activity
-            android:parentActivityName=".ui.MainActivity"
-            android:name=".ui.ListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ClientActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.ListActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -21,4 +21,8 @@
     <string name="delete">Excluir</string>
     <string name="delete_message">O que deseja fazer?</string>
     <string name="clients">CLIENTES</string>
+    <string name="user">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="invalid_login">Usuário ou Senha incorretos!</string>
 </resources>
