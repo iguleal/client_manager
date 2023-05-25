@@ -2,8 +2,9 @@ package com.example.clientmanager.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ class ListActivity : AppCompatActivity(), OnClickListener {
     private lateinit var binding: ActivityListBinding
     private var listClient = mutableListOf<Client>()
     private lateinit var adapter: ListAdapter
+    private lateinit var launcherData: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +31,17 @@ class ListActivity : AppCompatActivity(), OnClickListener {
 
         val rvList: RecyclerView = findViewById(R.id.rv_list)
 
+        launcherData = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+
+            if (it.resultCode == ClientActivity.RESULT_OK) {
+                listClient.clear()
+                queryAllClient()
+            }
+        }
+
         binding.floatingCreatePerson.setOnClickListener {
             val i = Intent(this, ClientActivity::class.java)
-            startActivity(i)
+            launcherData.launch(i)
         }
 
         val titleMainItem =
@@ -71,15 +81,10 @@ class ListActivity : AppCompatActivity(), OnClickListener {
         rvList.layoutManager = LinearLayoutManager(this)
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        recreate()
-    }
-
     override fun onClick(id: Int) {
         val i = Intent(this, ClientActivity::class.java)
         i.putExtra("clientId", id)
-        startActivity(i)
+        launcherData.launch(i)
     }
 
     override fun onLongClickListener(client: Client, position: Int) {

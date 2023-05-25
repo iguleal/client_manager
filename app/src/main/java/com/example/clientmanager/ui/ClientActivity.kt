@@ -20,6 +20,10 @@ import java.util.Locale
 
 class ClientActivity : AppCompatActivity() {
 
+    companion object{
+        const val RESULT_OK = 100
+    }
+
     private lateinit var binding: ActivityClientBinding
     private var paymentList = arrayListOf<Int>()
     private var clientId: Int = Constants.CLIENT.NEW_CLIENT
@@ -92,7 +96,9 @@ class ClientActivity : AppCompatActivity() {
                     dao.insert(client)
 
                     runOnUiThread {
-                        //avisar pra list activity atualizar a lista
+                        setResult(
+                            RESULT_OK
+                        )
                         finish()
                     }
 
