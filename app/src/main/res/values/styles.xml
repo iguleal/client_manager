@@ -4,4 +4,11 @@
     <style name="AutoTextViewForm" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
     </style>
 
+    <style name="EDIT_TEXT">
+        <item name="android:textColor">@color/bordo</item>
+        <item name="android:textColorHint">@color/bordo</item>
+        <item name="android:background">@drawable/background_edit_text</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
 </resources>

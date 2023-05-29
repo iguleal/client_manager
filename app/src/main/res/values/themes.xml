@@ -13,9 +13,4 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
-    <style name="EDIT_TEXT">
-        <item name="android:textColor">@color/bordo</item>
-        <item name="android:textColorHint">@color/bordo</item>
-    </style>
 </resources>
