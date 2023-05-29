@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.containerClient.setOnClickListener {
+        binding.clClient.setOnClickListener {
             val i = Intent(this@MainActivity, ListActivity::class.java)
             i.putExtra("title", Constants.TITLE.CLIENTS)
             startActivity(i)
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         val listItem = mutableListOf<MainItem>()
         listItemAdd(listItem)
-
         val adapter = MainAdapter(listItem) { title ->
             when (title) {
                 Constants.TITLE.SERVICES -> {

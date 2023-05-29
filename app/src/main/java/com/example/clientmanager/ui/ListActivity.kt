@@ -31,11 +31,34 @@ class ListActivity : AppCompatActivity(), OnClickListener {
 
         val rvList: RecyclerView = findViewById(R.id.rv_list)
 
+        val titleMainItem =
+            intent?.extras?.getString("title") ?: throw Exception(" title not found ")
+
         launcherData = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 
             if (it.resultCode == ClientActivity.RESULT_OK) {
-                listClient.clear()
-                queryAllClient()
+                when(titleMainItem){
+                    Constants.TITLE.CLIENTS -> {
+                        listClient.clear()
+                        queryAllClient()
+                    }
+                    Constants.TITLE.SERVICES -> {
+                        listClient.clear()
+                        queryClientsByFix(false)
+                    }
+                    Constants.TITLE.FIXED -> {
+                        listClient.clear()
+                        queryClientsByFix(true)
+                    }
+                    Constants.TITLE.PAID -> {
+                        listClient.clear()
+                        queryClientsByPaid(true)
+                    }
+                    Constants.TITLE.NOT_PAID -> {
+                        listClient.clear()
+                        queryClientsByPaid(false)
+                    }
+                }
             }
         }
 
@@ -43,9 +66,6 @@ class ListActivity : AppCompatActivity(), OnClickListener {
             val i = Intent(this, ClientActivity::class.java)
             launcherData.launch(i)
         }
-
-        val titleMainItem =
-            intent?.extras?.getString("title") ?: throw Exception(" title not found ")
 
         actionBar(titleMainItem)
 

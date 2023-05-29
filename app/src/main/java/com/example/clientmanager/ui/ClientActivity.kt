@@ -148,6 +148,9 @@ class ClientActivity : AppCompatActivity() {
                     dao.update(client)
 
                     runOnUiThread {
+                        setResult(
+                            RESULT_OK
+                        )
                         finish()
                     }
                 }.start()

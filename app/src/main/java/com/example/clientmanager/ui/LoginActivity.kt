@@ -18,14 +18,14 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
 
-            val user = binding.editUser.text.toString()
+            val user = binding.editUser.text.toString().lowercase()
             val password = binding.editPassword.text.toString()
 
-            if ( user != "admin" || password != "admin") {
-                Toast.makeText(this@LoginActivity, R.string.invalid_login, Toast.LENGTH_SHORT)
-                    .show()
-                return@setOnClickListener
-            }
+//            if ( user != "x" || password != "x") {
+//                Toast.makeText(this@LoginActivity, R.string.invalid_login, Toast.LENGTH_SHORT)
+//                    .show()
+//                return@setOnClickListener
+//            }
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         }

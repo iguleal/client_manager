@@ -30,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
+            style="@style/EDIT_TEXT"
             android:background="@drawable/background_edit_text"
             android:hint="@string/value"
             android:inputType="number"
@@ -64,6 +65,7 @@
             android:background="@drawable/background_edit_text"
             android:hint="@string/value"
             android:inputType="number"
+            style="@style/EDIT_TEXT"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/txt_cash"
             app:layout_constraintEnd_toEndOf="@+id/view"
@@ -97,6 +99,7 @@
             android:hint="@string/value"
             android:inputType="number"
             android:textAlignment="center"
+            style="@style/EDIT_TEXT"
             app:layout_constraintBottom_toBottomOf="@+id/txt_pix"
             app:layout_constraintEnd_toEndOf="@+id/view2"
             app:layout_constraintTop_toTopOf="@+id/txt_pix" />
@@ -128,6 +131,7 @@
             android:background="@drawable/background_edit_text"
             android:hint="@string/value"
             android:inputType="number"
+            style="@style/EDIT_TEXT"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/txt_card"
             app:layout_constraintEnd_toEndOf="@+id/view3"
@@ -152,6 +156,7 @@
             <AutoCompleteTextView
                 android:id="@+id/auto_card"
                 android:layout_width="match_parent"
+                android:textColor="@color/bordo"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_edit_text"
                 android:inputType="none" />
